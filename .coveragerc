@@ -1,0 +1,7 @@
+[run]
+source =
+    datamuse
+
+[report]
+fail_under = 80
+skip_empty = True
