@@ -1,0 +1,10 @@
+name: "Test Pull Requests"
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-test-suite:
+    uses: ./.github/workflows/ci-pytest.yml
