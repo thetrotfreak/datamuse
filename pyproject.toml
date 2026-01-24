@@ -1,0 +1,19 @@
+[project]
+name = "datamuse"
+version = "0.1.0"
+description = "datamuse is a simple wrapper around the datamuse api https://www.datamuse.com/api/"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "certifi>=2026.1.4",
+    "urllib3>=2.6.3",
+]
+
+[dependency-groups]
+dev = [
+    "mkdocs-material>=9.7.1",
+    "mkdocstrings-python>=2.0.1",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "pytest-mock>=3.15.1",
+]
