@@ -6,7 +6,10 @@ on:
       - v*
 
 jobs:
-  run:
+  run-test-suite:
+    uses: ./.github/workflows/ci-pytest.yml
+  build-and-publish:
+    needs: run-test-suite
     runs-on: ubuntu-latest
     environment:
       name: pypi
@@ -15,11 +18,7 @@ jobs:
       contents: read
     strategy:
       matrix:
-        python-version:
-          - "3.11"
-          - "3.12"
-          - "3.13"
-          - "3.14"
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -29,8 +28,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install datamuse
         run: uv sync --locked --all-extras --dev
-      - name: Run tests
-        run: uv run pytest
       - name: Build
         run: uv build
       - name: Smoke test (wheel)
