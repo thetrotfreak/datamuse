@@ -1,10 +1,10 @@
 # datamuse
 
-`datamuse` is a simple wrapper around the [datamuse](https://www.datamuse.com/) [api](https://www.datamuse.com/api/)
+__datamuse__ is a simple wrapper around the [datamuse api](https://www.datamuse.com/api/)
 
 ## Installing
-
-You can install `datamuse` via `pip` / `pypi`:
+- _datamuse_ is available on [pypi](https://pypi.org/project/datamuse/)
+- You can install _datamuse_ via _pip_:
 
 ```shell
 pip install datamuse
