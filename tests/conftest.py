@@ -26,7 +26,10 @@ def datamuse_mock(mocker) -> Callable[..., Datamuse]:
             )
 
         mocker.patch.object(
-            muse._Datamuse__pool, "request", autospec=True, side_effect=request
+            muse._Datamuse__pool,  # pyright: ignore[reportAttributeAccessIssue]
+            "request",
+            autospec=True,
+            side_effect=request,
         )
         return muse
 
