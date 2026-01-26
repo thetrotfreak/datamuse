@@ -2,6 +2,13 @@ import unittest
 
 
 class SmokeTest(unittest.TestCase):
+    def test_import_modules(self):
+        """Test that all required modules can be imported."""
+        try:
+            import datamuse as datamuse
+        except ImportError:
+            raise
+
     def test_basic_functionality(self):
         """Test basic functionality works as expected."""
         from datamuse import Datamuse
@@ -9,13 +16,6 @@ class SmokeTest(unittest.TestCase):
         muse = Datamuse()
         synonyms = muse.synonyms("test")
         self.assertTrue(len(synonyms))
-
-    def test_import_modules(self):
-        """Test that all required modules can be imported."""
-        try:
-            import datamuse as datamuse
-        except ImportError:
-            raise
 
     def test_configuration(self):
         """Test that configuration is properly loaded."""
@@ -31,6 +31,23 @@ class SmokeTest(unittest.TestCase):
         with self.assertRaises(TypeError):
             muse = Datamuse()
             muse.suggestions("why?")
+
+    def test_metadata(self):
+        """Test usage with metadata flags."""
+        from datamuse import Datamuse
+
+        muse = Datamuse()
+        muse.with_metadata(
+            "definitions", "parts_of_speech", "syllable_count"
+        ).homophones("smoke")
+        self.assertIn("smoke", muse.metadata)
+
+        muse.with_metadata(
+            "definitions", "parts_of_speech", "syllable_count"
+        ).suggestions("why do we")
+        self.assertIn("smoke", muse.metadata)
+        # NOTE: /sug does not support ?md=
+        self.assertNotIn("why do we", muse.metadata)
 
 
 if __name__ == "__main__":
