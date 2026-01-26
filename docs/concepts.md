@@ -6,7 +6,6 @@ A word recognized by the Datamuse API.
 
 Alias of `LiteralString`.
 
-<!-- ::: datamuse.Word -->
 
 ## `Constraints`
 |   code|   Description|   Example
