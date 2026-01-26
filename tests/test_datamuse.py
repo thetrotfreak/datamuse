@@ -1,6 +1,6 @@
 import pytest
 
-from datamuse.annotations import _lookup_related_code
+from datamuse.annotations import _lookup_metadata_flag, _lookup_related_code
 
 
 class TestDatamuse:
@@ -83,3 +83,23 @@ class TestDatamuse:
         )
         related = mock.related(word_mock, parameter)
         assert word_mock in related
+
+    @pytest.mark.parametrize("flag", _lookup_metadata_flag)
+    def test_with_metadata_words(self, datamuse_mock, word_mock, flag):
+        mock = datamuse_mock(
+            method="GET",
+            url="/words",
+            response=[
+                {
+                    "word": word_mock,
+                    "tags": ["u", "n", "v", "adj", "adv"],
+                    "defs": [word_mock],
+                    "numSyllables": len(word_mock),
+                }
+            ],
+            match_query={"ml": word_mock, "md": f"{_lookup_metadata_flag[flag]}"},
+        )
+        synonyms = mock.with_metadata(flag).synonyms(word_mock)
+        assert word_mock in synonyms
+        assert word_mock in mock.metadata
+        assert flag in mock.metadata[word_mock]
