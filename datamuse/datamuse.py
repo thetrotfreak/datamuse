@@ -95,7 +95,7 @@ class Datamuse:
                             self._make_parts_of_speech(obj)
                         case "s":
                             self._make_syllable_count(obj)
-                        case "_":  # pragma: no cover
+                        case _:  # pragma: no cover
                             # TODO: support remaining documenetd metadata flags
                             continue
         return words
